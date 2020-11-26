@@ -74,8 +74,17 @@ async def bmi(h: int = 1, w: int = 0):
     des = ""
     h = (h / 100) ** 2
     bmi = w / h
+    f'{bmi:.2f}'
     if (bmi < 18.5):
         des = "น้ำหนักต่ำกว่าเกณฑ์"
+    if (bmi < 22.5):
+        des = "สมส่วน"
+    if (bmi < 24.9):
+        des = "น้ำหนักเกิน"
+    if (bmi < 29.9):
+        des = "โรคอ้วน"
+    else:
+        des = "โรคอ้วนอันตราย"
     jsonout = {'bmi': bmi, 'des': des}
     return jsonout
 
