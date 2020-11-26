@@ -75,13 +75,13 @@ async def bmi(h: int = 1, w: int = 0):
     h = (h / 100) ** 2
     bmi = w / h
 
-    if (bmi <= 29.9):
+    if (bmi < 29.9 and bmi > 25.0):
         des = "โรคอ้วน"
-    elif (bmi <= 24.9):
+    elif (bmi < 24.9 and bmi > 23.0):
         des = "น้ำหนักเกิน"
-    elif (bmi <= 22.5):
+    elif (bmi < 22.5 and bmi > 18.5):
         des = "สมส่วน"
-    elif (bmi <= 18.5):
+    elif (bmi < 18.5):
         des = "น้ำหนักต่ำกว่าเกณฑ์"
     else:
         des = "โรคอ้วนอันตราย"
