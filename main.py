@@ -69,6 +69,17 @@ async def sum(li):
     return np.sum(np.array(ls))
 
 
+@app.get("/BMI")
+async def bmi(h: int = 1, w: int = 0):
+    des = ""
+    h = (h / 100) ** 2
+    bmi = w / h
+    if (bmi < 18.5):
+        des = "น้ำหนักต่ำกว่าเกณฑ์"
+    jsonout = {'bmi': bmi, 'des': des}
+    return jsonout
+
+
 @app.get("/avg")
 async def avg(li):
     ls = tonumlist(li)
