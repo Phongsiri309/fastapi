@@ -131,35 +131,35 @@ async def validation_ctzid(text):
 
 
 @app.get("/NormalizeNumber")
-async def number(a: str = ""):
-    if ('.' in a):
-        nsplit = a.split('.')
+async def number(Num: str = ""):
+    if '.' in Num:
+        nsplit = Num.split('.')
         if (',' in nsplit[0]):
             n2split = nsplit[0].split(',')
             for ch in n2split[1::]:
                 if len(ch) == 3:
-                    a1 = float(a.replace(',', ''))
+                    a1 = float(Num.replace(',', ''))
                     status = 'True'
                 else:
-                    a1 = a
+                    a1 = Num
                     status = 'False'
         else:
-            a1 = float(a.replace(',', ''))
+            a1 = float(Num.replace(',', ''))
             status = 'True'
-    elif len(a) == 3:
-        a1 = float(a.replace(',', ''))
+    elif len(Num) == 3:
+        a1 = float(Num.replace(',', ''))
         status = 'True'
-    elif ',' in a:
-        Csplit = a.split(',')
+    elif ',' in Num:
+        Csplit = Num.split(',')
         for b in Csplit[1::]:
             if len(b) == 3:
-                a1 = float(a.replace(',', ''))
+                a1 = float(Num.replace(',', ''))
                 status = 'True'
             else:
-                a1 = a
+                a1 = Num
                 status = 'False'
     else:
-        a1 = a
+        a1 = Num
         status = 'False'
 
     jsonout = {'a1': a1, 'status': status}
