@@ -130,7 +130,39 @@ async def validation_ctzid(text):
     return d13 == int(listdata[12])
 
 
-@app.get("/validation-email")
+@app.get("/NormalizeNumber")
+async def number(a: str = ""):
+    if ('.' in a):
+        nsplit = a.split('.')
+        if (',' in nsplit[0]):
+            n2split = nsplit[0].split(',')
+            for ch in n2split[1::]:
+                if len(ch) == 3:
+                    a1 = float(a.replace(',', ''))
+                    status = 'True1'
+                else:
+                    a1 = a
+                    status = 'False1'
+        else:
+            a1 = float(a.replace(',', ''))
+            status = 'True'
+    elif len(a) == 3:
+        a1 = float(a.replace(',', ''))
+        status = 'True'
+    else:
+        a1 = a
+        status = 'False'
+
+    jsonout = {'a1': a1, 'status': status}
+    return jsonout
+
+    # nor = int(a.replace(',', ''))
+    # des = 'true'
+    # jsonout = {'nor': nor, 'des': des}
+    # return jsonout
+
+
+@ app.get("/validation-email")
 async def validation_email(text):
     regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
     if re.search(regex, text):
@@ -139,7 +171,7 @@ async def validation_email(text):
         return False
 
 
-@app.get("/google-search", response_class=PlainTextResponse)
+@ app.get("/google-search", response_class=PlainTextResponse)
 def google_search(text):
 
     headers = {
