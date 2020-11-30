@@ -139,16 +139,25 @@ async def number(a: str = ""):
             for ch in n2split[1::]:
                 if len(ch) == 3:
                     a1 = float(a.replace(',', ''))
-                    status = 'True1'
+                    status = 'True'
                 else:
                     a1 = a
-                    status = 'False1'
+                    status = 'False'
         else:
             a1 = float(a.replace(',', ''))
             status = 'True'
     elif len(a) == 3:
         a1 = float(a.replace(',', ''))
         status = 'True'
+    elif ',' in a:
+        Csplit = a.split(',')
+        for b in Csplit[1::]:
+            if len(b) == 3:
+                a1 = float(a.replace(',', ''))
+                status = 'True'
+            else:
+                a1 = a
+                status = 'False'
     else:
         a1 = a
         status = 'False'
