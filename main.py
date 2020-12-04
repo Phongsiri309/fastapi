@@ -24,9 +24,6 @@ app.add_middleware(
 )
 
 
-app = FastAPI()
-
-
 def result(res):
     return {"result": res}
 
