@@ -9,6 +9,20 @@ import math
 import requests
 from bs4 import BeautifulSoup
 from fastapi.responses import PlainTextResponse
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 app = FastAPI()
 
@@ -131,35 +145,35 @@ async def validation_ctzid(text):
 
 
 @app.get("/NormalizeNumber")
-async def number(Num: str = ""):
-    if '.' in Num:
-        nsplit = Num.split('.')
+async def number(Number: str = ""):
+    if '.' in Number:
+        nsplit = Number.split('.')
         if (',' in nsplit[0]):
             n2split = nsplit[0].split(',')
             for ch in n2split[1::]:
                 if len(ch) == 3:
-                    a1 = float(Num.replace(',', ''))
+                    a1 = float(Number.replace(',', ''))
                     status = 'True'
                 else:
-                    a1 = Num
+                    a1 = Number
                     status = 'False'
         else:
-            a1 = float(Num.replace(',', ''))
+            a1 = float(Number.replace(',', ''))
             status = 'True'
-    elif len(Num) == 3:
-        a1 = float(Num.replace(',', ''))
+    elif len(Number) == 3:
+        a1 = float(Number.replace(',', ''))
         status = 'True'
-    elif ',' in Num:
-        Csplit = Num.split(',')
+    elif ',' in Number:
+        Csplit = Number.split(',')
         for b in Csplit[1::]:
             if len(b) == 3:
-                a1 = float(Num.replace(',', ''))
+                a1 = float(Number.replace(',', ''))
                 status = 'True'
             else:
-                a1 = Num
+                a1 = Number
                 status = 'False'
     else:
-        a1 = Num
+        a1 = Number
         status = 'False'
 
     jsonout = {'a1': a1, 'status': status}
